@@ -1,6 +1,7 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import ProjectsPreview from "@/components/ProjectsPreview";
+import SystemMap from "@/components/SystemMap";
 
 function About() {
   return (
@@ -28,6 +29,7 @@ function About() {
       <div className="focus-strip">
         <span>01 / COMPUTER VISION</span><span>02 / OPENCV</span><span>03 / SOFTWARE SYSTEMS</span><span>04 / REAL-WORLD PROBLEMS</span>
       </div>
+      <div className="about-signal"><span>FOCUS SIGNAL</span><strong>VISION → SYSTEMS → IMPACT</strong><span>ACTIVE</span></div>
     </section>
   );
 }
@@ -55,5 +57,5 @@ function Footer() {
 }
 
 export default function Home() {
-  return <><Nav /><main><Hero /><About /><ProjectsPreview /><section id="timeline" className="timeline-placeholder"><div className="section-kicker">CH.03 — ACTIVITY LOG</div><h2>Timeline is coming next.</h2></section><Explore /><Footer /></main></>;
+  return <><Nav /><main><Hero /><About /><SystemMap /><ProjectsPreview /><section id="timeline" className="timeline-placeholder"><div className="section-kicker">CH.03 — ACTIVITY LOG</div><h2>Timeline is coming next.</h2></section><Explore /><Footer /></main></>;
 }
