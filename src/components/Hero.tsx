@@ -1,148 +1,159 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { NODES, LINKS, type SkillNode } from "@/data/nodes";
 
-const byId = Object.fromEntries(NODES.map((n) => [n.id, n]));
+const byId = Object.fromEntries(NODES.map((node) => [node.id, node]));
 
 export default function Hero() {
   const [active, setActive] = useState<SkillNode | null>(null);
+  const [time, setTime] = useState("");
   const netRef = useRef<SVGSVGElement>(null);
 
-  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+  useEffect(() => {
+    const tick = () => {
+      setTime(
+        new Intl.DateTimeFormat("en-GB", {
+          timeZone: "Asia/Bangkok",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: false,
+        }).format(new Date()),
+      );
+    };
+    tick();
+    const timer = window.setInterval(tick, 1000);
+    return () => window.clearInterval(timer);
+  }, []);
+
+  const handleMouseMove = useCallback((event: React.MouseEvent) => {
     const cx = window.innerWidth / 2;
     const cy = window.innerHeight / 2;
-    const dx = (e.clientX - cx) / cx;
-    const dy = (e.clientY - cy) / cy;
-    if (netRef.current) {
-      netRef.current.style.transform = `translate(${dx * 6}px, ${dy * 6}px)`;
+    const dx = (event.clientX - cx) / cx;
+    const dy = (event.clientY - cy) / cy;
+    if (netRef.current && window.innerWidth > 720) {
+      netRef.current.style.transform = `translate(${dx * 7}px, ${dy * 7}px)`;
     }
   }, []);
 
-  let calloutLeft = 0;
-  let calloutTop = 0;
-  let leaderX2 = 0;
-  let leaderY2 = 0;
-
-  if (active) {
-    calloutLeft = Math.min(active.x + 24, 480 - 220);
-    calloutTop = Math.max(active.y - 30, 0);
-    leaderX2 = calloutLeft + 6;
-    leaderY2 = calloutTop + 6;
-  }
+  const calloutLeft = active ? Math.min(active.x + 28, 480 - 232) : 0;
+  const calloutTop = active ? Math.max(active.y - 34, 12) : 0;
 
   return (
-    <div id="home" className="scene" onMouseMove={handleMouseMove}>
+    <section id="home" className="scene" onMouseMove={handleMouseMove}>
+      <div className="space-grid" aria-hidden="true" />
       <div className="hero-copy">
-        <div className="status">STATUS: ONLINE</div>
+        <div className="hero-meta">
+          <span className="status">STATUS: ONLINE</span>
+          <span className="clock">CHIANG MAI / {time || "--:--:--"} ICT</span>
+        </div>
+        <p className="eyebrow">COMPUTER SCIENCE · COMPUTER VISION</p>
         <h1>
-          Computer science student.
+          I build systems
           <br />
-          I build systems that
-          <br />
-          see &amp; respond.
+          that <em>see</em> &amp; respond.
         </h1>
-        <p>
-          Computer vision · full-stack · systems engineering · algorithmic
-          trading
+        <p className="hero-lede">
+          A Computer Science student exploring Computer Vision, OpenCV, and
+          practical software systems that turn visual information into action.
         </p>
+        <div className="hero-actions">
+          <a className="hero-button primary" href="#about">
+            EXPLORE PROFILE <span>↓</span>
+          </a>
+          <a className="hero-button" href="#projects">
+            VIEW WORK <span>→</span>
+          </a>
+        </div>
       </div>
 
       <div className="network-wrap" onMouseLeave={() => setActive(null)}>
-        <svg
-          ref={netRef}
-          className="net-svg"
-          viewBox="0 0 480 480"
-          aria-hidden="true"
-        >
+        <div className="network-caption">
+          <span>NEURAL SYSTEM</span>
+          <span>07 NODES / LIVE</span>
+        </div>
+        <svg ref={netRef} className="net-svg" viewBox="0 0 480 480">
           <defs>
-            <filter
-              id="glow"
-              x="-100%"
-              y="-100%"
-              width="300%"
-              height="300%"
-            >
-              <feGaussianBlur stdDeviation="3.2" result="b" />
+            <filter id="glow" x="-100%" y="-100%" width="300%" height="300%">
+              <feGaussianBlur stdDeviation="3.2" result="blur" />
               <feMerge>
-                <feMergeNode in="b" />
+                <feMergeNode in="blur" />
                 <feMergeNode in="SourceGraphic" />
               </feMerge>
             </filter>
+            <radialGradient id="brainHalo">
+              <stop offset="0" stopColor="rgba(127,230,168,0.12)" />
+              <stop offset="1" stopColor="rgba(127,230,168,0)" />
+            </radialGradient>
           </defs>
+          <ellipse cx="240" cy="250" rx="205" ry="180" fill="url(#brainHalo)" />
 
-          <g>
-            {LINKS.map(([a, b], i) => {
-              const na = byId[a];
-              const nb = byId[b];
+          <g className="links-layer" aria-hidden="true">
+            {LINKS.map(([from, to], index) => {
+              const a = byId[from];
+              const b = byId[to];
+              const related = active && (active.id === from || active.id === to);
               return (
                 <line
-                  key={i}
-                  className="link"
-                  x1={na.x}
-                  y1={na.y}
-                  x2={nb.x}
-                  y2={nb.y}
+                  key={`${from}-${to}`}
+                  className={`link ${related ? "link-active" : ""}`}
+                  x1={a.x}
+                  y1={a.y}
+                  x2={b.x}
+                  y2={b.y}
+                  style={{ animationDelay: `${index * 180}ms` }}
                 />
               );
             })}
           </g>
 
-          {active && (
-            <line
-              className="link"
-              strokeDasharray="3 3"
-              x1={active.x}
-              y1={active.y}
-              x2={leaderX2}
-              y2={leaderY2}
-              style={{ opacity: 0.6 }}
-              filter="url(#glow)"
-            />
-          )}
-
           <g>
-            {NODES.map((n) => (
-              <g
-                key={n.id}
-                className="node-group"
-                onMouseEnter={() => setActive(n)}
-                onClick={() => setActive(n)}
-                style={{ cursor: "pointer" }}
-              >
-                <circle
-                  className={`node-dot${active?.id === n.id ? " active" : ""}`}
-                  cx={n.x}
-                  cy={n.y}
-                  r={5}
-                />
-                <text className="node-label" x={n.x + 10} y={n.y + 4}>
-                  {n.label}
-                </text>
-              </g>
-            ))}
+            {NODES.map((node) => {
+              const selected = active?.id === node.id;
+              return (
+                <g
+                  key={node.id}
+                  className={`node-group ${selected ? "selected" : ""}`}
+                  onMouseEnter={() => setActive(node)}
+                  onClick={() => setActive(node)}
+                  tabIndex={0}
+                  role="button"
+                  aria-label={`Explore ${node.label}`}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter" || event.key === " ") setActive(node);
+                  }}
+                >
+                  <circle className="node-hit" cx={node.x} cy={node.y} r={18} />
+                  <circle className="node-ring" cx={node.x} cy={node.y} r={8} />
+                  <circle className="node-dot" cx={node.x} cy={node.y} r={4.5} />
+                  <text className="node-label" x={node.x + 13} y={node.y + 4}>
+                    {node.label}
+                  </text>
+                </g>
+              );
+            })}
           </g>
         </svg>
 
         {active && (
-          <div
-            className="callout"
-            style={{ left: calloutLeft, top: calloutTop }}
-          >
+          <div className="callout" style={{ left: calloutLeft, top: calloutTop }}>
+            <button className="callout-close" onClick={() => setActive(null)} aria-label="Close detail">
+              ×
+            </button>
+            <div className="callout-index">NODE / {active.id.toUpperCase()}</div>
             <div className="label">{active.label}</div>
             <p>{active.desc}</p>
             <div className="tags">{active.tags}</div>
-            <a className="explore" href={active.href}>
-              EXPLORE →
-            </a>
+            <a className="explore" href={active.href}>EXPLORE →</a>
           </div>
         )}
       </div>
 
-      <div className="scroll-cue">
+      <div className="scroll-cue" aria-hidden="true">
         <div className="line" />
-        <span>SCROLL</span>
+        <span>SCROLL TO EXPLORE</span>
       </div>
-    </div>
+    </section>
   );
 }
