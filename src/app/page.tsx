@@ -60,5 +60,32 @@ function Footer() {
 }
 
 export default function Home() {
-  return <><Nav /><main><Hero /><About /><SystemMap /><ProjectsPreview /><section id="timeline" className="timeline-placeholder"><div className="section-kicker">CH.03 — ACTIVITY LOG</div><h2>Timeline is coming next.</h2></section><Footer /></main></>;
+  return <><Nav /><main><Hero /><About /><SystemMap /><ProjectsPreview /><section id="timeline" className="timeline-placeholder">
+        <div className="section-kicker">CH.03 — CURRENT FOCUS / LEARNING LOG</div>
+        <div className="focus-head">
+          <div>
+            <h2>กำลังเรียนรู้ และกำลังสร้างอะไรต่อไป</h2>
+            <p>ผมกำลังต่อยอดจาก Computer Science ไปสู่ระบบที่มองเห็น เข้าใจ และปลอดภัยมากขึ้น โดยเรียนรู้ผ่านการลงมือทำจริงกับโปรเจกต์ของตัวเอง</p>
+          </div>
+          <span className="focus-readout">STATUS / EXPLORING</span>
+        </div>
+        <div className="focus-grid">
+          <article className="focus-card">
+            <span>01 / LEARNING</span>
+            <h3>Cybersecurity</h3>
+            <p>กำลังศึกษาพื้นฐานด้านความปลอดภัยทางไซเบอร์ ทั้งแนวคิดของเครือข่าย การป้องกันระบบ และการมองหาช่องโหว่ เพื่อพัฒนาตัวเองไปสู่สายงาน Security ในอนาคต</p>
+          </article>
+          <article className="focus-card">
+            <span>02 / BUILDING</span>
+            <h3>Computer Vision · OpenCV</h3>
+            <p>พัฒนาความเข้าใจด้าน Computer Vision ผ่าน Face Recognition, Hand Gesture และระบบที่นำข้อมูลจากภาพไปใช้เป็นคำสั่งหรือข้อมูลสำหรับซอฟต์แวร์</p>
+          </article>
+          <article className="focus-card">
+            <span>03 / EXPLORING</span>
+            <h3>IoT &amp; Innovation</h3>
+            <p>สนใจการเชื่อมต่อซอฟต์แวร์ อุปกรณ์ และข้อมูลเข้าด้วยกัน เพื่อสร้างระบบที่นำไปใช้งานจริงและแก้ปัญหาในโลกจริงได้</p>
+          </article>
+        </div>
+        <div className="focus-next"><span>NEXT DIRECTION</span><strong>SECURITY → VISION → CONNECTED SYSTEMS</strong><span>IN PROGRESS</span></div>
+      </section><Footer /></main></>;
 }

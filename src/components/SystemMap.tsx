@@ -44,7 +44,7 @@ export default function SystemMap() {
             );
           })}
         </svg>
-        <div className="map-footer"><span>SELECT A PROJECT NODE</span><span>{active ? active.label : "AWAITING INPUT"}</span></div>
+        <div className="map-footer"><span>EXPLORE A NODE</span><span>{active ? active.label : "AWAITING INPUT"}</span></div>
         {active && (
           <div className="map-detail" role="status" aria-live="polite">
             <span className="map-detail-id">PROJECT / {active.id.toUpperCase()}</span>
