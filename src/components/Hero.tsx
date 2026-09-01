@@ -46,17 +46,19 @@ export default function Hero() {
       <div className="hero-copy">
         <div className="hero-meta">
           <span className="status">STATUS: ONLINE</span>
-          <span className="clock">CHIANG MAI / {time || "--:--:--"} ICT</span>
         </div>
         <p className="eyebrow">COMPUTER SCIENCE · COMPUTER VISION</p>
         <h1>
-          I build systems
+          A collection of
           <br />
-          that <em>see</em> &amp; respond.
+          <em>work &amp; ideas.</em>
         </h1>
         <p className="hero-lede">
-          A Computer Science student exploring Computer Vision, OpenCV, and
-          practical software systems that turn visual information into action.
+          I&apos;m a Computer Science student at Maejo University who enjoys turning ideas into things that actually work.
+          My interests span Computer Vision, OpenCV, Cybersecurity, and IoT innovation. I like exploring how software
+          interacts with the real world — from understanding visual information to building systems that are practical,
+          secure, and useful. This portfolio is a record of that journey — the projects I build, the problems I encounter,
+          and the things I learn along the way.
         </p>
         <div className="hero-actions">
           <a className="hero-button primary" href="#about">
@@ -69,10 +71,6 @@ export default function Hero() {
       </div>
 
       <div className="network-wrap" onMouseLeave={() => setActive(null)}>
-        <div className="network-caption">
-          <span>NEURAL SYSTEM</span>
-          <span>07 NODES / LIVE</span>
-        </div>
         <svg ref={netRef} className="net-svg" viewBox="0 0 480 480">
           <defs>
             <filter id="glow" x="-100%" y="-100%" width="300%" height="300%">

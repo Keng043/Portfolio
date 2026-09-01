@@ -193,7 +193,9 @@ body {
   position: absolute;
   width: 220px;
   padding: 14px 16px;
-  background: rgba(10, 12, 11, 0.92);
+  background: rgba(10, 12, 11, 0.28);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   border: 1px solid var(--accent-dim);
   border-radius: 4px;
   box-shadow: 0 0 24px rgba(127, 230, 168, 0.15);
