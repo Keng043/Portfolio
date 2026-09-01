@@ -41,7 +41,7 @@ export const NODES: SkillNode[] = [
     id: "docker-dashboard",
     x: 370,
     y: 300,
-    label: "TOUCHLESS DOCKER",
+    label: "TOUCHLESS DOCKER DASHBOARD",
     desc: "Dashboard สำหรับควบคุมและติดตาม Docker Container ด้วย Computer Vision และ Hand Gesture โดยใช้การเคลื่อนไหวของมือเป็นคำสั่งในการจัดการ Container",
     tags: "Computer Vision · Docker",
     href: "https://github.com/Keng043/touchless-docker-dashboard",

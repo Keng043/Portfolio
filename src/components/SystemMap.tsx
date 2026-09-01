@@ -11,16 +11,16 @@ export default function SystemMap() {
 
   return (
     <section id="system-map" className="system-map-section">
-      <div className="section-kicker">CH.01B — SYSTEM MAP / HOW I THINK</div>
+      <div className="section-kicker">SYSTEM MAP — PROJECT CONNECTIONS</div>
       <div className="map-head">
         <div>
-          <h2>Interests become systems.</h2>
-          <p>Follow the connections to see how tools, ideas, and projects fit together.</p>
+          <h2>Explore how my projects connect.</h2>
+          <p>Follow the connections to see how tools, ideas, and systems come together.</p>
         </div>
         <span className="map-readout">LINKED GRAPH / {mapNodes.length} NODES</span>
       </div>
       <div className="system-map" role="application" aria-label="Interactive map of skills and interests">
-        <svg viewBox="0 0 900 430" aria-hidden="true">
+        <svg viewBox="0 0 900 430" aria-hidden="true" onMouseLeave={() => setActive(null)}>
           {LINKS.map(([from, to]) => {
             const a = nodeById[from];
             const b = nodeById[to];
@@ -36,7 +36,7 @@ export default function SystemMap() {
             const x = 70 + (node.x / 480) * 760;
             const y = 35 + (node.y / 480) * 350;
             return (
-              <g key={node.id} className={active?.id === node.id ? "map-node selected" : "map-node"} onMouseEnter={() => setActive(node)} onClick={() => setActive(node)} tabIndex={0} role="button" aria-label={node.label} onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && setActive(node)}>
+              <g key={node.id} className={active?.id === node.id ? "map-node selected" : "map-node"} onMouseEnter={() => setActive(node)} tabIndex={0} role="button" aria-label={node.label} onFocus={() => setActive(node)} onBlur={() => setActive(null)}>
                 <circle cx={x} cy={y} r="20" className="map-hit" />
                 <circle cx={x} cy={y} r="6" className="map-dot" />
                 <text x={x + 13} y={y + 4}>{node.label}</text>
@@ -44,8 +44,15 @@ export default function SystemMap() {
             );
           })}
         </svg>
-        <div className="map-footer"><span>SELECT A NODE</span><span>{active ? active.label : "AWAITING INPUT"}</span></div>
-        {active && <div className="map-detail"><span className="map-detail-id">NODE / {active.id.toUpperCase()}</span><strong>{active.label}</strong><p>{active.desc}</p><a href={active.href}>OPEN RELATED WORK →</a></div>}
+        <div className="map-footer"><span>SELECT A PROJECT NODE</span><span>{active ? active.label : "AWAITING INPUT"}</span></div>
+        {active && (
+          <div className="map-detail" role="status" aria-live="polite">
+            <span className="map-detail-id">PROJECT / {active.id.toUpperCase()}</span>
+            <strong>{active.label}</strong>
+            <p>{active.desc}</p>
+            <a href={active.href} target="_blank" rel="noopener noreferrer">VIEW PROJECT →</a>
+          </div>
+        )}
       </div>
     </section>
   );

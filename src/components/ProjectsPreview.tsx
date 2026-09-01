@@ -15,8 +15,8 @@ export default function ProjectsPreview() {
             <div className="idx">{p.index}</div>
             <h3>{p.title}</h3>
             <p>{p.description}</p>
-            <a className="view-link" href={p.href}>
-              VIEW CASE STUDY →
+            <a className="view-link" href={p.href} target="_blank" rel="noopener noreferrer">
+              VIEW PROJECT →
             </a>
           </div>
         ))}

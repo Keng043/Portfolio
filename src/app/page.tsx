@@ -34,28 +34,31 @@ function About() {
   );
 }
 
-function Explore() {
-  return (
-    <section className="explore-section" aria-label="Explore portfolio">
-      <div className="section-kicker">SYSTEM DIRECTORY</div>
-      <div className="explore-grid">
-        <a href="#projects"><span>CH.02</span><strong>WORK</strong><small>Projects &amp; case studies →</small></a>
-        <a href="#timeline"><span>CH.03</span><strong>TIMELINE</strong><small>Activity &amp; milestones →</small></a>
-        <a href="#contact"><span>CH.04</span><strong>CONTACT</strong><small>Establish connection →</small></a>
-      </div>
-    </section>
-  );
-}
-
 function Footer() {
   return (
     <footer id="contact" className="footer">
-      <div><span className="section-kicker">CH.04 — ESTABLISH CONNECTION</span><h2>Have something worth building?</h2></div>
-      <a className="hero-button primary" href="mailto:hello@example.com">GET IN TOUCH →</a>
+      <div className="contact-header">
+        <span className="section-kicker">CH.04 — CONTACT / ESTABLISH CONNECTION</span>
+        <h2>LET&apos;S ESTABLISH A CONNECTION.</h2>
+        <p>Computer Science Student · Maejo University</p>
+      </div>
+      <div className="contact-grid">
+        <div className="contact-block">
+          <span>EMAIL</span>
+          <a href="mailto:kengkiat4331@gmail.com">kengkiat4331@gmail.com</a>
+          <a href="mailto:mju6704101306@mju.ac.th">mju6704101306@mju.ac.th</a>
+        </div>
+        <div className="contact-block">
+          <span>SOCIAL</span>
+          <a href="https://github.com/Keng043" target="_blank" rel="noopener noreferrer">GitHub <b>→</b></a>
+          <a href="https://www.facebook.com/kong.kiat.32913/" target="_blank" rel="noopener noreferrer">Facebook <b>→</b></a>
+        </div>
+      </div>
+      <a className="hero-button primary" href="mailto:kengkiat4331@gmail.com">SEND EMAIL →</a>
     </footer>
   );
 }
 
 export default function Home() {
-  return <><Nav /><main><Hero /><About /><SystemMap /><ProjectsPreview /><section id="timeline" className="timeline-placeholder"><div className="section-kicker">CH.03 — ACTIVITY LOG</div><h2>Timeline is coming next.</h2></section><Explore /><Footer /></main></>;
+  return <><Nav /><main><Hero /><About /><SystemMap /><ProjectsPreview /><section id="timeline" className="timeline-placeholder"><div className="section-kicker">CH.03 — ACTIVITY LOG</div><h2>Timeline is coming next.</h2></section><Footer /></main></>;
 }
