@@ -11,7 +11,7 @@ export default function SystemMap() {
 
   return (
     <section id="system-map" className="system-map-section">
-      <div className="section-kicker">SYSTEM MAP — PROJECT CONNECTIONS</div>
+      <div className="section-kicker">SYSTEM MAP — NODE CONNECTIONS</div>
       <div className="map-head">
         <div>
           <h2>Explore how my projects connect.</h2>
@@ -47,10 +47,10 @@ export default function SystemMap() {
         <div className="map-footer"><span>EXPLORE A NODE</span><span>{active ? active.label : "AWAITING INPUT"}</span></div>
         {active && (
           <div className="map-detail" role="status" aria-live="polite">
-            <span className="map-detail-id">PROJECT / {active.id.toUpperCase()}</span>
+            <span className="map-detail-id">NODE / {active.id.toUpperCase()}</span>
             <strong>{active.label}</strong>
             <p>{active.desc}</p>
-            <a href={active.href} target="_blank" rel="noopener noreferrer">VIEW PROJECT →</a>
+            <a href={active.href} target="_blank" rel="noopener noreferrer">EXPLORE NODE →</a>
           </div>
         )}
       </div>

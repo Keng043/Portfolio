@@ -60,11 +60,11 @@ function Footer() {
 }
 
 export default function Home() {
-  return <><Nav /><main><Hero /><About /><SystemMap /><ProjectsPreview /><section id="timeline" className="timeline-placeholder">
+  return <><Nav /><main><Hero /><About /><ProjectsPreview /><SystemMap /><section id="timeline" className="timeline-placeholder">
         <div className="section-kicker">CH.03 — CURRENT FOCUS / LEARNING LOG</div>
         <div className="focus-head">
           <div>
-            <h2>กำลังเรียนรู้ และกำลังสร้างอะไรต่อไป</h2>
+            <h2>ช่วงนี้ผมกำลังทำอะไรอยู่</h2>
             <p>ผมกำลังต่อยอดจาก Computer Science ไปสู่ระบบที่มองเห็น เข้าใจ และปลอดภัยมากขึ้น โดยเรียนรู้ผ่านการลงมือทำจริงกับโปรเจกต์ของตัวเอง</p>
           </div>
           <span className="focus-readout">STATUS / EXPLORING</span>
@@ -86,6 +86,36 @@ export default function Home() {
             <p>สนใจการเชื่อมต่อซอฟต์แวร์ อุปกรณ์ และข้อมูลเข้าด้วยกัน เพื่อสร้างระบบที่นำไปใช้งานจริงและแก้ปัญหาในโลกจริงได้</p>
           </article>
         </div>
-        <div className="focus-next"><span>NEXT DIRECTION</span><strong>SECURITY → VISION → CONNECTED SYSTEMS</strong><span>IN PROGRESS</span></div>
+        <div className="focus-next roadmap">
+          <div className="roadmap-head"><span>ROADMAP</span><span>MY PATH SO FAR</span></div>
+          <div className="roadmap-track">
+            <div className="roadmap-step"><span>01</span><strong>BUSINESS<br />COMPUTER</strong><small>จุดเริ่มต้น</small></div>
+            <div className="roadmap-line" />
+            <div className="roadmap-step achievement-step">
+              <span>02</span>
+              <strong>IoT<br />COMPETITIONS</strong>
+              <small>สร้างของจริง · แข่งขัน · ได้รางวัล</small>
+              <div className="roadmap-award">🏆 2 NATIONAL AWARDS</div>
+              <div className="roadmap-achievements">
+                <article>
+                  <b>2022 · 1ST PRIZE</b>
+                  <strong>Wireless Helmet Signal Light</strong>
+                  <small>Team FtwoK · Prime Minister&apos;s Award for Health Promotion Innovation 2022</small>
+                </article>
+                <article>
+                  <b>2023 · HONORABLE MENTION</b>
+                  <strong>Helmet Safe Your Life</strong>
+                  <small>Team Good 4 You · Prime Minister&apos;s Award for Health Promotion Innovation 2023</small>
+                </article>
+              </div>
+            </div>
+            <div className="roadmap-line" />
+            <div className="roadmap-step active"><span>03</span><strong>COMPUTER<br />SCIENCE</strong><small>กำลังเรียนอยู่</small></div>
+            <div className="roadmap-line" />
+            <div className="roadmap-step"><span>04</span><strong>CYBER<br />SECURITY</strong><small>กำลังลองและเรียนรู้</small></div>
+            <div className="roadmap-line" />
+            <div className="roadmap-step next"><span>05</span><strong>NEXT<br />?</strong><small>ยังหาอยู่</small></div>
+          </div>
+        </div>
       </section><Footer /></main></>;
 }

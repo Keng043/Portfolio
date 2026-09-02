@@ -74,7 +74,7 @@ export default function Nav() {
       <div className="links">
         <a className={active === "about" ? "active" : ""} href="#about"><span>CH.01</span> ABOUT</a>
         <a className={active === "projects" ? "active" : ""} href="#projects"><span>CH.02</span> PROJECTS</a>
-        <a className={active === "timeline" ? "active" : ""} href="#timeline"><span>CH.03</span> TIMELINE</a>
+        <a className={active === "timeline" ? "active" : ""} href="#timeline"><span>CH.03</span> FOCUS</a>
         <a className={active === "contact" ? "active" : ""} href="#contact"><span>CH.04</span> CONTACT</a>
       </div>
     </nav>
