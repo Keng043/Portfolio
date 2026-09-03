@@ -7,6 +7,7 @@ const byId = Object.fromEntries(NODES.map((node) => [node.id, node]));
 
 export default function Hero() {
   const [active, setActive] = useState<SkillNode | null>(null);
+  const [preview, setPreview] = useState<SkillNode | null>(null);
   const [time, setTime] = useState("");
   const netRef = useRef<SVGSVGElement>(null);
 
@@ -37,8 +38,9 @@ export default function Hero() {
     }
   }, []);
 
-  const calloutLeft = active ? Math.min(active.x + 28, 480 - 232) : 0;
-  const calloutTop = active ? Math.max(active.y - 34, 12) : 0;
+  const visibleNode = preview ?? active;
+  const calloutLeft = visibleNode ? Math.min(visibleNode.x + 28, 480 - 232) : 0;
+  const calloutTop = visibleNode ? Math.max(visibleNode.y - 34, 12) : 0;
 
   return (
     <section id="home" className="scene" onMouseMove={handleMouseMove}>
@@ -70,7 +72,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="network-wrap" onMouseLeave={() => setActive(null)}>
+      <div className="network-wrap" onMouseLeave={() => setPreview(null)}>
         <svg ref={netRef} className="net-svg" viewBox="0 0 480 480">
           <defs>
             <filter id="glow" x="-100%" y="-100%" width="300%" height="300%">
@@ -91,7 +93,8 @@ export default function Hero() {
             {LINKS.map(([from, to], index) => {
               const a = byId[from];
               const b = byId[to];
-              const related = active && (active.id === from || active.id === to);
+              const focus = preview ?? active;
+              const related = focus && (focus.id === from || focus.id === to);
               return (
                 <line
                   key={`${from}-${to}`}
@@ -113,11 +116,13 @@ export default function Hero() {
                 <g
                   key={node.id}
                   className={`node-group ${selected ? "selected" : ""}`}
-                  onMouseEnter={() => setActive(node)}
+                  onMouseEnter={() => setPreview(node)}
                   onClick={() => setActive(node)}
                   tabIndex={0}
                   role="button"
                   aria-label={`Explore ${node.label}`}
+                  onFocus={() => setPreview(node)}
+                  onBlur={() => setPreview(null)}
                   onKeyDown={(event) => {
                     if (event.key === "Enter" || event.key === " ") setActive(node);
                   }}
@@ -134,16 +139,16 @@ export default function Hero() {
           </g>
         </svg>
 
-        {active && (
-          <div className="callout" style={{ left: calloutLeft, top: calloutTop }}>
-            <button className="callout-close" onClick={() => setActive(null)} aria-label="Close detail">
+        {visibleNode && (
+          <div className={`callout ${preview ? "callout-preview" : ""}`} style={{ left: calloutLeft, top: calloutTop }}>
+            <button className="callout-close" onClick={() => { setActive(null); setPreview(null); }} aria-label="Close detail">
               ×
             </button>
-            <div className="callout-index">NODE / {active.id.toUpperCase()}</div>
-            <div className="label">{active.label}</div>
-            <p>{active.desc}</p>
-            <div className="tags">{active.tags}</div>
-            <a className="explore" href={active.href}>EXPLORE →</a>
+            <div className="callout-index">NODE / {visibleNode.id.toUpperCase()}</div>
+            <div className="label">{visibleNode.label}</div>
+            <p>{visibleNode.desc}</p>
+            <div className="tags">{visibleNode.tags}</div>
+            <a className="explore" href={visibleNode.href}>EXPLORE →</a>
           </div>
         )}
       </div>

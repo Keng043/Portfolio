@@ -73,6 +73,7 @@ export interface Project {
   title: string;
   description: string;
   href: string;
+  tags?: string;
 }
 
 export const PROJECTS: Project[] = [
@@ -115,5 +116,14 @@ export const PROJECTS: Project[] = [
     description:
       "ระบบจดจำใบหน้าและบันทึกการเข้า–ออกห้องของนักศึกษา เพื่อช่วยติดตามการใช้งานห้องและจัดเก็บข้อมูลการเข้าออกอย่างเป็นระบบ",
     href: "https://github.com/Keng043/smart_security_command_center",
+  },
+  {
+    id: "wireless-helmet-signal-light",
+    index: "AWARD 01",
+    title: "Wireless Helmet Signal Light",
+    description:
+      "อุปกรณ์เสริมหมวกกันน็อคนิรภัยอัจฉริยะที่แสดงสัญญาณไฟเลี้ยวและไฟเบรกบนหมวก เพื่อช่วยเพิ่มการมองเห็นและลดความเสี่ยงจากอุบัติเหตุบนท้องถนน",
+    href: "/projects/wireless-helmet-signal-light",
+    tags: "IoT · Safety Innovation · 1ST PRIZE",
   },
 ];

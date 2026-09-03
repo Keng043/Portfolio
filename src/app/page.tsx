@@ -61,61 +61,33 @@ function Footer() {
 
 export default function Home() {
   return <><Nav /><main><Hero /><About /><ProjectsPreview /><SystemMap /><section id="timeline" className="timeline-placeholder">
-        <div className="section-kicker">CH.03 — CURRENT FOCUS / LEARNING LOG</div>
+        <div className="section-kicker">CH.03 — CURRENT DIRECTION</div>
         <div className="focus-head">
           <div>
-            <h2>ช่วงนี้ผมกำลังทำอะไรอยู่</h2>
-            <p>ผมกำลังต่อยอดจาก Computer Science ไปสู่ระบบที่มองเห็น เข้าใจ และปลอดภัยมากขึ้น โดยเรียนรู้ผ่านการลงมือทำจริงกับโปรเจกต์ของตัวเอง</p>
+            <h2>WHAT I&apos;M EXPLORING</h2>
+            <p>ตอนนี้ผมกำลังทดลองหลายด้านของ Computer Science เพื่อค้นหาสิ่งที่ตัวเองอยากไปต่อจริง ๆ โดยเน้นการเรียนรู้ผ่านการสร้างและทดลองกับระบบจริง</p>
           </div>
           <span className="focus-readout">STATUS / EXPLORING</span>
         </div>
         <div className="focus-grid">
           <article className="focus-card">
-            <span>01 / LEARNING</span>
+            <span>01 / SECURITY</span>
             <h3>Cybersecurity</h3>
-            <p>กำลังศึกษาพื้นฐานด้านความปลอดภัยทางไซเบอร์ ทั้งแนวคิดของเครือข่าย การป้องกันระบบ และการมองหาช่องโหว่ เพื่อพัฒนาตัวเองไปสู่สายงาน Security ในอนาคต</p>
+            <p>กำลังเรียนรู้พื้นฐานด้าน Network Security และ System Security รวมถึงแนวคิดการมองระบบจากทั้งมุมของการป้องกันและการโจมตี</p>
+            <small>STATUS: LEARNING</small>
           </article>
           <article className="focus-card">
-            <span>02 / BUILDING</span>
+            <span>02 / VISION</span>
             <h3>Computer Vision · OpenCV</h3>
-            <p>พัฒนาความเข้าใจด้าน Computer Vision ผ่าน Face Recognition, Hand Gesture และระบบที่นำข้อมูลจากภาพไปใช้เป็นคำสั่งหรือข้อมูลสำหรับซอฟต์แวร์</p>
+            <p>พัฒนาความเข้าใจด้าน Computer Vision ผ่าน Face Recognition, Hand Gesture และการนำข้อมูลจากภาพไปเชื่อมกับซอฟต์แวร์ที่ใช้งานได้จริง</p>
+            <small>STATUS: BUILDING</small>
           </article>
           <article className="focus-card">
-            <span>03 / EXPLORING</span>
+            <span>03 / SYSTEMS</span>
             <h3>IoT &amp; Innovation</h3>
-            <p>สนใจการเชื่อมต่อซอฟต์แวร์ อุปกรณ์ และข้อมูลเข้าด้วยกัน เพื่อสร้างระบบที่นำไปใช้งานจริงและแก้ปัญหาในโลกจริงได้</p>
+            <p>สนใจการเชื่อมต่อ Software, Hardware และข้อมูลเข้าด้วยกัน เพื่อสร้างระบบที่แก้ปัญหาในโลกจริงได้</p>
+            <small>STATUS: EXPLORING</small>
           </article>
-        </div>
-        <div className="focus-next roadmap">
-          <div className="roadmap-head"><span>ROADMAP</span><span>MY PATH SO FAR</span></div>
-          <div className="roadmap-track">
-            <div className="roadmap-step"><span>01</span><strong>BUSINESS<br />COMPUTER</strong><small>จุดเริ่มต้น</small></div>
-            <div className="roadmap-line" />
-            <div className="roadmap-step achievement-step">
-              <span>02</span>
-              <strong>IoT<br />COMPETITIONS</strong>
-              <small>สร้างของจริง · แข่งขัน · ได้รางวัล</small>
-              <div className="roadmap-award">🏆 2 NATIONAL AWARDS</div>
-              <div className="roadmap-achievements">
-                <article>
-                  <b>2022 · 1ST PRIZE</b>
-                  <strong>Wireless Helmet Signal Light</strong>
-                  <small>Team FtwoK · Prime Minister&apos;s Award for Health Promotion Innovation 2022</small>
-                </article>
-                <article>
-                  <b>2023 · HONORABLE MENTION</b>
-                  <strong>Helmet Safe Your Life</strong>
-                  <small>Team Good 4 You · Prime Minister&apos;s Award for Health Promotion Innovation 2023</small>
-                </article>
-              </div>
-            </div>
-            <div className="roadmap-line" />
-            <div className="roadmap-step active"><span>03</span><strong>COMPUTER<br />SCIENCE</strong><small>กำลังเรียนอยู่</small></div>
-            <div className="roadmap-line" />
-            <div className="roadmap-step"><span>04</span><strong>CYBER<br />SECURITY</strong><small>กำลังลองและเรียนรู้</small></div>
-            <div className="roadmap-line" />
-            <div className="roadmap-step next"><span>05</span><strong>NEXT<br />?</strong><small>ยังหาอยู่</small></div>
-          </div>
         </div>
       </section><Footer /></main></>;
 }
