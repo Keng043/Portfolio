@@ -1,37 +1,62 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
-import { NODES, PROJECTS } from "@/data/nodes";
+import { PROJECTS } from "@/data/nodes";
 
 export default function ProjectsPreview() {
-  const nodeById = Object.fromEntries(NODES.map((node) => [node.id, node]));
+  const [selectedId, setSelectedId] = useState(PROJECTS[0]?.id ?? "");
+  const selected = PROJECTS.find((project) => project.id === selectedId) ?? PROJECTS[0];
 
   return (
-    <section id="projects" className="projects-section">
+    <section id="projects" className="projects-section projects-selector-section">
       <div className="section-head">CH.02 — PROJECTS</div>
-      <h2>Systems I&apos;ve built and shipped.</h2>
-      <div className="project-grid">
-        {PROJECTS.map((p) => (
-          <article key={p.id} className="project-card">
-            <span className="corner tl" /><span className="corner tr" />
-            <span className="corner bl" /><span className="corner br" />
-            <div className="idx">{p.index}</div>
-            <h3>{p.title}</h3>
-            <p>{p.description}</p>
-            <div className="project-meta">
-              <span>NODE / {p.id.toUpperCase()}</span>
-              <span>{nodeById[p.id]?.tags}</span>
-            </div>
-            <div className="project-footer">
-              <span className="project-status">PROJECT DETAIL</span>
-              <Link className="view-link" href={`/projects/${p.id}`}>
-                VIEW CASE STUDY →
+      <div className="project-selector-head">
+        <div>
+          <h2>PROJECT INDEX</h2>
+          <p>เลือกงานที่ต้องการดูรายละเอียด</p>
+        </div>
+        <span className="project-selector-count">{PROJECTS.length.toString().padStart(2, "0")} ENTRIES</span>
+      </div>
+      <div className="project-selector">
+        <div className="project-index-list" role="listbox" aria-label="Project index">
+          {PROJECTS.map((project) => {
+            const active = project.id === selected?.id;
+            return (
+              <button
+                key={project.id}
+                type="button"
+                className={`project-index-item${active ? " active" : ""}`}
+                onClick={() => setSelectedId(project.id)}
+                onMouseEnter={() => setSelectedId(project.id)}
+                role="option"
+                aria-selected={active}
+              >
+                <span className="project-index-number">{project.index}</span>
+                <span className="project-index-title">{project.title}</span>
+                <span className="project-index-arrow">→</span>
+              </button>
+            );
+          })}
+        </div>
+        {selected && (
+          <article className="project-preview-panel">
+            <span className="project-preview-kicker">{selected.index} / {selected.id.toUpperCase()}</span>
+            <h3>{selected.title}</h3>
+            <div className="project-preview-tags">{selected.tags ?? "SYSTEM / DEVELOPMENT"}</div>
+            <p>{selected.description}</p>
+            <div className="project-preview-footer">
+              <span>CASE STUDY / READY</span>
+              <Link className="view-link" href={`/projects/${selected.id}`}>
+                OPEN CASE STUDY →
               </Link>
             </div>
           </article>
-        ))}
+        )}
       </div>
       <div className="project-archive-note">
-        <span>ARCHIVE / WORKS</span>
-        <small>Project details are being documented as the portfolio grows.</small>
+        <span>INDEX / WORKS</span>
+        <small>Hover or select an entry to inspect the work.</small>
       </div>
     </section>
   );
