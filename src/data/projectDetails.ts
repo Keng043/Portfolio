@@ -106,6 +106,26 @@ export const PROJECT_DETAILS: ProjectDetail[] = [
     result: "พื้นที่สำหรับสรุปผลลัพธ์ของโปรเจกต์",
   },
   {
+    slug: "csmju2030",
+    title: "CSMJU2030",
+    index: "LEAD 01",
+    category: "MIS · PROJECT LEAD",
+    year: "2026",
+    status: "IN PROGRESS",
+    summary:
+      "โครงการพัฒนาระบบสารสนเทศขนาดใหญ่สำหรับสาขาวิทยาการคอมพิวเตอร์ มหาวิทยาลัยแม่โจ้ โดยผมได้รับเลือกเป็น Project Lead (PL) และดูแลลูกทีม 4 คน",
+    problem:
+      "โครงการมีขนาดใหญ่และต้องทำงานร่วมกันหลายส่วน จึงต้องมีการวางแผนและประสานงานให้ทีมพัฒนาระบบไปในทิศทางเดียวกัน",
+    solution:
+      "วางแนวทางการทำงานของทีม แบ่งงานและติดตามความคืบหน้า ประสานงานกับส่วนที่เกี่ยวข้อง และช่วยกำหนดแนวทางการพัฒนาระบบให้ทีมทำงานต่อได้อย่างเป็นระบบ",
+    role: "Project Lead (PL) / Planning / Team Coordination / System Direction",
+    technologies: ["AI-Assisted Development", "MIS", "System Planning", "Team Coordination"],
+    result:
+      "เริ่มวางโครงสร้างการทำงานและแนวทางพัฒนาระบบ พร้อมประสานทีมให้สามารถเดินหน้าพัฒนาแต่ละส่วนได้อย่างต่อเนื่อง",
+    team: "4 team members",
+    institution: "Maejo University · Computer Science",
+  },
+  {
     slug: "wireless-helmet-signal-light",
     title: "Wireless Helmet Signal Light",
     index: "AWARD 01",
