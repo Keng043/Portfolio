@@ -8,6 +8,9 @@ const byId = Object.fromEntries(NODES.map((node) => [node.id, node]));
 export default function Hero() {
   const [active, setActive] = useState<SkillNode | null>(null);
   const [preview, setPreview] = useState<SkillNode | null>(null);
+  const [mobileZoom, setMobileZoom] = useState(1);
+  const [mobilePan, setMobilePan] = useState({ x: 0, y: 0 });
+  const touchRef = useRef({ distance: 0, zoom: 1, x: 0, y: 0, panX: 0, panY: 0, mode: "none" as "none" | "pan" | "pinch" });
   const [time, setTime] = useState("");
   const netRef = useRef<SVGSVGElement>(null);
 
@@ -39,6 +42,30 @@ export default function Hero() {
   }, []);
 
   const visibleNode = preview ?? active;
+  const clampZoom = (value: number) => Math.min(2.1, Math.max(1, value));
+  const zoomBy = (delta: number) => setMobileZoom((value) => clampZoom(value + delta));
+  const resetMobileView = () => { setMobileZoom(1); setMobilePan({ x: 0, y: 0 }); };
+  const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+    if (event.touches.length === 2) {
+      const a = event.touches[0]; const b = event.touches[1];
+      touchRef.current = { distance: Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY), zoom: mobileZoom, x: 0, y: 0, panX: mobilePan.x, panY: mobilePan.y, mode: "pinch" };
+    } else if (event.touches.length === 1) {
+      const t = event.touches[0];
+      touchRef.current = { distance: 0, zoom: mobileZoom, x: t.clientX, y: t.clientY, panX: mobilePan.x, panY: mobilePan.y, mode: "pan" };
+    }
+  };
+  const handleTouchMove = (event: React.TouchEvent<HTMLDivElement>) => {
+    if (event.touches.length === 2 && touchRef.current.mode === "pinch") {
+      event.preventDefault();
+      const a = event.touches[0]; const b = event.touches[1];
+      const distance = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
+      if (touchRef.current.distance > 0) setMobileZoom(clampZoom(touchRef.current.zoom * (distance / touchRef.current.distance)));
+    } else if (event.touches.length === 1 && touchRef.current.mode === "pan") {
+      event.preventDefault();
+      const t = event.touches[0];
+      setMobilePan({ x: touchRef.current.panX + t.clientX - touchRef.current.x, y: touchRef.current.panY + t.clientY - touchRef.current.y });
+    }
+  };
   const calloutLeft = visibleNode ? Math.min(visibleNode.x + 28, 480 - 232) : 0;
   const calloutTop = visibleNode ? Math.max(visibleNode.y - 34, 12) : 0;
 
@@ -72,8 +99,8 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="network-wrap" onMouseLeave={() => setPreview(null)}>
-        <svg ref={netRef} className="net-svg" viewBox="0 0 480 480">
+      <div className="network-wrap" onMouseLeave={() => setPreview(null)} onTouchStart={handleTouchStart} onTouchMove={handleTouchMove}>
+        <svg ref={netRef} className="net-svg" viewBox="0 0 480 480" style={{ transform: `translate(${mobilePan.x}px, ${mobilePan.y}px) scale(${mobileZoom})` }}>
           <defs>
             <filter id="glow" x="-100%" y="-100%" width="300%" height="300%">
               <feGaussianBlur stdDeviation="3.2" result="blur" />

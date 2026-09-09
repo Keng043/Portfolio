@@ -17,6 +17,7 @@ export default function SystemMap() {
         <div>
           <h2>Explore how my projects connect.</h2>
           <p>Follow the connections to see how tools, ideas, and systems come together.</p>
+          <div className="map-instruction">HOVER NODE TO INSPECT · CLICK TO OPEN · TAB TO NAVIGATE</div>
         </div>
         <span className="map-readout">LINKED GRAPH / {mapNodes.length} NODES</span>
       </div>
@@ -38,7 +39,23 @@ export default function SystemMap() {
             const x = 70 + (node.x / 480) * 760;
             const y = 35 + (node.y / 480) * 350;
             return (
-              <g key={node.id} className={active?.id === node.id ? "map-node selected" : "map-node"} onMouseEnter={() => setPreview(node)} onClick={() => setActive(node)} tabIndex={0} role="button" aria-label={node.label} onFocus={() => setPreview(node)} onBlur={() => setPreview(null)} onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") setActive(node); }}>
+              <g
+                key={node.id}
+                className={active?.id === node.id ? "map-node selected" : "map-node"}
+                onMouseEnter={() => setPreview(node)}
+                onClick={() => setActive(node)}
+                tabIndex={0}
+                role="button"
+                aria-label={`Explore ${node.label}`}
+                onFocus={() => setPreview(node)}
+                onBlur={() => setPreview(null)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    setActive(node);
+                  }
+                }}
+              >
                 <circle cx={x} cy={y} r="20" className="map-hit" />
                 <circle cx={x} cy={y} r="6" className="map-dot" />
                 <text x={x + 13} y={y + 4}>{node.label}</text>

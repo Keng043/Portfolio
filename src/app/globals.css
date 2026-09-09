@@ -474,7 +474,6 @@ body {
 .profile-row strong { color:var(--text-primary); font-weight:400; text-align:right; }
 .profile-status { margin-top:18px; color:var(--accent); font:9px var(--font-mono),monospace; letter-spacing:1px; }
 .profile-status i { display:inline-block; width:5px; height:5px; border-radius:50%; background:var(--accent); margin-right:8px; box-shadow:0 0 8px var(--accent); }
-.focus-strip { display:flex; flex-wrap:wrap; justify-content:space-between; gap:15px; margin-top:70px; padding-top:18px; border-top:1px solid rgba(255,255,255,.08); color:var(--text-muted); font:9px var(--font-mono),monospace; letter-spacing:1px; }
 .timeline-placeholder { padding-top:120px; padding-bottom:120px; background:#0b0b0d; }
 .focus-head { display:flex; justify-content:space-between; align-items:flex-end; gap:40px; margin-top:24px; }
 .focus-head h2 { max-width:700px; font-size:clamp(30px,4vw,52px); line-height:1.08; letter-spacing:-1.8px; font-weight:500; margin:0 0 14px; }
@@ -547,7 +546,6 @@ body {
   .about-section,.timeline-placeholder { padding:85px 5%; }
   .contact-grid { grid-template-columns:1fr; gap:28px; }
   .contact-block a { overflow-wrap:anywhere; }
-  .focus-strip { flex-direction:column; gap:10px; }
 }
 @media (prefers-reduced-motion:reduce) {
   *,*::before,*::after { scroll-behavior:auto !important; animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; }
@@ -638,15 +636,15 @@ body {
   .hero-copy p { font-size:12px; line-height:1.65; }
   .hero-actions { gap:8px; }
   .hero-button { min-width:0; padding:10px 12px; font-size:8px; }
-  .network-wrap { width:94vw; height:94vw; margin-top:-4px; }
+  .network-wrap { width:88vw; height:88vw; margin:34px auto 0; }
   .network-caption { opacity:.75; }
   .system-map-section { padding:72px 5% 78px; }
   .map-head { margin-bottom:22px; }
   .map-head h2 { font-size:31px; letter-spacing:-1.2px; }
   .map-head p { font-size:12px; line-height:1.55; }
   .system-map,.system-map svg { min-height:330px; height:330px; }
-  .system-map svg { transform:scale(1.28); }
-  .map-node text { font-size:12px; }
+  .system-map svg { transform:scale(1.12); }
+  .map-node text { font-size:9px; }
   .map-footer { font-size:7px; }
   .timeline-placeholder { padding-top:72px; }
   .roadmap { overflow:visible; }
@@ -833,4 +831,99 @@ body {
   .project-preview-panel p { font-size:12px; line-height:1.7; margin-top:18px; }
   .project-preview-footer { align-items:flex-start; flex-direction:column; gap:14px; margin-top:26px; }
   .project-preview-footer .view-link { width:100%; justify-content:space-between; }
+}
+
+/* ===== ACCESSIBILITY + UX POLISH ===== */
+.topnav .links a:focus-visible,
+.detail-back:focus-visible,
+.detail-contact:focus-visible,
+.hero-button:focus-visible,
+.contact-block a:focus-visible {
+  outline:1px solid var(--accent);
+  outline-offset:5px;
+}
+
+.hero-button:focus-visible,
+.detail-back:focus-visible,
+.detail-contact:focus-visible,
+.contact-block a:focus-visible {
+  text-shadow:0 0 12px rgba(127,230,168,.3);
+}
+
+.image-lightbox-close {
+  border:1px solid rgba(127,230,168,.28);
+  background:rgba(127,230,168,.04);
+  color:var(--accent);
+  padding:7px 10px;
+  font:8px var(--font-mono),monospace;
+  letter-spacing:1px;
+  cursor:pointer;
+}
+.image-lightbox-close:hover,
+.image-lightbox-close:focus-visible {
+  background:rgba(127,230,168,.1);
+  outline:1px solid var(--accent);
+  outline-offset:3px;
+}
+
+.map-instruction {
+  margin-top:14px;
+  color:var(--text-muted);
+  font:8px var(--font-mono),monospace;
+  letter-spacing:1px;
+}
+.detail-breadcrumb {
+  margin-bottom:12px;
+  color:var(--text-muted);
+  font:8px var(--font-mono),monospace;
+  letter-spacing:1.1px;
+}
+
+@media (max-width:560px) {
+  .topnav .links a:nth-child(3) { display:inline; }
+  .topnav .links { max-width:58%; justify-content:flex-end; }
+  .topnav .links a { font-size:6.5px; }
+  .topnav .brand { flex-shrink:0; }
+  .topnav .visitor-status { flex-shrink:0; }
+  .system-map svg { transform:scale(1.12); }
+  .detail-breadcrumb { line-height:1.5; margin-bottom:10px; }
+}
+
+
+/* ===== MOBILE HERO NETWORK BOUNDARY ===== */
+@media (max-width:560px) {
+  .scene {
+    overflow:hidden;
+    padding-bottom:28px;
+  }
+
+  .hero-copy {
+    padding-bottom:0;
+  }
+
+  /* Invisible reserved zone: nodes can never climb back into the copy/buttons. */
+  .network-wrap {
+    position:relative;
+    width:82vw;
+    height:82vw;
+    margin:108px auto 0;
+    overflow:hidden;
+    animation:none;
+  }
+
+  .network-wrap .net-svg {
+    width:100%;
+    height:100%;
+    transform:none !important;
+  }
+
+  .network-wrap .node-label {
+    font-size:7px;
+  }
+}
+
+/* ===== MOBILE HERO NETWORK TOUCH ===== */
+@media (max-width:560px) {
+  .network-wrap { touch-action:none; }
+  .network-wrap .net-svg { transform-origin:center; }
 }

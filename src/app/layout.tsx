@@ -5,7 +5,7 @@ import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 export const metadata: Metadata = {
   title: "Kong — Computer Science Student",
   description:
-    "Computer vision, full-stack, and systems engineering portfolio.",
+    "Kongkiat's portfolio — Computer Vision, OpenCV, Cybersecurity, and IoT innovation.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

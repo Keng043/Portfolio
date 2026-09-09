@@ -8,6 +8,13 @@ export default function ProjectsPreview() {
   const [selectedId, setSelectedId] = useState(PROJECTS[0]?.id ?? "");
   const selected = PROJECTS.find((project) => project.id === selectedId) ?? PROJECTS[0];
 
+  const selectRelative = (currentId: string, delta: number) => {
+    const index = PROJECTS.findIndex((project) => project.id === currentId);
+    if (index < 0) return;
+    const nextIndex = (index + delta + PROJECTS.length) % PROJECTS.length;
+    setSelectedId(PROJECTS[nextIndex].id);
+  };
+
   return (
     <section id="projects" className="projects-section projects-selector-section">
       <div className="section-head">CH.02 — PROJECTS</div>
@@ -19,7 +26,7 @@ export default function ProjectsPreview() {
         <span className="project-selector-count">{PROJECTS.length.toString().padStart(2, "0")} ENTRIES</span>
       </div>
       <div className="project-selector">
-        <div className="project-index-list" role="listbox" aria-label="Project index">
+        <div className="project-index-list" role="list" aria-label="Project index">
           {PROJECTS.map((project) => {
             const active = project.id === selected?.id;
             return (
@@ -29,18 +36,36 @@ export default function ProjectsPreview() {
                 className={`project-index-item${active ? " active" : ""}`}
                 onClick={() => setSelectedId(project.id)}
                 onMouseEnter={() => setSelectedId(project.id)}
-                role="option"
-                aria-selected={active}
+                aria-pressed={active}
+                aria-label={`${project.index}: ${project.title}`}
+                onKeyDown={(event) => {
+                  if (event.key === "ArrowDown" || event.key === "ArrowRight") {
+                    event.preventDefault();
+                    selectRelative(project.id, 1);
+                  }
+                  if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
+                    event.preventDefault();
+                    selectRelative(project.id, -1);
+                  }
+                  if (event.key === "Home") {
+                    event.preventDefault();
+                    setSelectedId(PROJECTS[0].id);
+                  }
+                  if (event.key === "End") {
+                    event.preventDefault();
+                    setSelectedId(PROJECTS[PROJECTS.length - 1].id);
+                  }
+                }}
               >
                 <span className="project-index-number">{project.index}</span>
                 <span className="project-index-title">{project.title}</span>
-                <span className="project-index-arrow">→</span>
+                <span className="project-index-arrow" aria-hidden="true">→</span>
               </button>
             );
           })}
         </div>
         {selected && (
-          <article className="project-preview-panel">
+          <article className="project-preview-panel" aria-live="polite">
             <span className="project-preview-kicker">{selected.index} / {selected.id.toUpperCase()}</span>
             <h3>{selected.title}</h3>
             <div className="project-preview-tags">{selected.tags ?? "SYSTEM / DEVELOPMENT"}</div>
@@ -56,7 +81,7 @@ export default function ProjectsPreview() {
       </div>
       <div className="project-archive-note">
         <span>INDEX / WORKS</span>
-        <small>Hover or select an entry to inspect the work.</small>
+        <small>Hover, select, or use arrow keys to inspect the work.</small>
       </div>
     </section>
   );

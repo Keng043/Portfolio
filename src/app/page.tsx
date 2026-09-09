@@ -26,10 +26,6 @@ function About() {
           <div className="profile-status"><i /> CURRENTLY LEARNING &amp; BUILDING</div>
         </div>
       </div>
-      <div className="focus-strip">
-        <span>01 / COMPUTER VISION</span><span>02 / OPENCV</span><span>03 / SOFTWARE SYSTEMS</span><span>04 / REAL-WORLD PROBLEMS</span>
-      </div>
-      <div className="about-signal"><span>FOCUS SIGNAL</span><strong>VISION → SYSTEMS → IMPACT</strong><span>ACTIVE</span></div>
     </section>
   );
 }

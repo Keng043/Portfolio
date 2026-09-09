@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ImageLightbox from "@/components/ImageLightbox";
@@ -8,6 +7,8 @@ export function generateStaticParams() {
   return PROJECT_DETAILS.map((project) => ({ slug: project.slug }));
 }
 
+const hasContent = (text?: string) => Boolean(text && !text.startsWith("พื้นที่สำหรับ"));
+
 export default async function ProjectDetailPage({
   params,
 }: {
@@ -15,7 +16,6 @@ export default async function ProjectDetailPage({
 }) {
   const { slug } = await params;
   const project = getProjectDetail(slug);
-
   if (!project) notFound();
 
   return (
@@ -26,6 +26,7 @@ export default async function ProjectDetailPage({
       </header>
 
       <section className="project-detail-hero">
+        <div className="detail-breadcrumb">PROJECTS / {project.index} / {project.title}</div>
         <div className="detail-kicker">{project.index} · {project.status}</div>
         <div className="detail-title-row">
           <div>
@@ -41,8 +42,8 @@ export default async function ProjectDetailPage({
         </div>
       </section>
 
-      {project.images ? (
-        <section className="project-gallery project-gallery-real" aria-label="Project image gallery">
+      {project.images && (
+        <section className="project-gallery project-gallery-real" aria-label={`${project.title} image gallery`}>
           {project.images.map((image, index) => (
             <figure className={index === 0 ? "gallery-image gallery-image-main" : "gallery-image"} key={image.src}>
               <ImageLightbox src={image.src} alt={image.caption ?? `${project.title} image ${index + 1}`} label={image.label} />
@@ -50,15 +51,9 @@ export default async function ProjectDetailPage({
             </figure>
           ))}
         </section>
-      ) : (
-        <section className="project-gallery" aria-label="Project image gallery">
-          <div className="gallery-placeholder main-placeholder"><span>IMAGE 01</span><strong>PROJECT HERO IMAGE</strong><small>วางรูปโปรเจกต์หลักตรงนี้ภายหลัง</small></div>
-          <div className="gallery-placeholder"><span>IMAGE 02</span><strong>DETAIL / PROCESS</strong></div>
-          <div className="gallery-placeholder"><span>IMAGE 03</span><strong>RESULT / PROTOTYPE</strong></div>
-        </section>
       )}
 
-      {project.motivation && (
+      {hasContent(project.motivation) && (
         <section className="project-context">
           <div className="section-kicker">PROJECT CONTEXT</div>
           <div className="context-grid">
@@ -69,13 +64,13 @@ export default async function ProjectDetailPage({
       )}
 
       <section className="project-story">
-        <StoryBlock number="01" title="PROBLEM" text={project.problem} />
-        <StoryBlock number="02" title="SOLUTION" text={project.solution} />
-        <StoryBlock number="03" title="MY ROLE" text={project.role} />
-        <StoryBlock number="04" title="RESULT" text={project.result} />
+        {hasContent(project.problem) && <StoryBlock number="01" title="PROBLEM" text={project.problem} />}
+        {hasContent(project.solution) && <StoryBlock number="02" title="SOLUTION" text={project.solution} />}
+        {hasContent(project.role) && <StoryBlock number="03" title="MY ROLE" text={project.role} />}
+        {hasContent(project.result) && <StoryBlock number="04" title="RESULT" text={project.result} />}
       </section>
 
-      {project.howItWorks && (
+      {hasContent(project.howItWorks) && (
         <section className="project-how-it-works">
           <div className="section-kicker">SYSTEM FLOW</div>
           <h2>How it works</h2>
