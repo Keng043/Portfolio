@@ -11,25 +11,7 @@ export default function Hero() {
   const [mobileZoom, setMobileZoom] = useState(1);
   const [mobilePan, setMobilePan] = useState({ x: 0, y: 0 });
   const touchRef = useRef({ distance: 0, zoom: 1, x: 0, y: 0, panX: 0, panY: 0, mode: "none" as "none" | "pan" | "pinch" });
-  const [time, setTime] = useState("");
   const netRef = useRef<SVGSVGElement>(null);
-
-  useEffect(() => {
-    const tick = () => {
-      setTime(
-        new Intl.DateTimeFormat("en-GB", {
-          timeZone: "Asia/Bangkok",
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-          hour12: false,
-        }).format(new Date()),
-      );
-    };
-    tick();
-    const timer = window.setInterval(tick, 1000);
-    return () => window.clearInterval(timer);
-  }, []);
 
   const handleMouseMove = useCallback((event: React.MouseEvent) => {
     const cx = window.innerWidth / 2;
@@ -43,8 +25,6 @@ export default function Hero() {
 
   const visibleNode = preview ?? active;
   const clampZoom = (value: number) => Math.min(2.1, Math.max(1, value));
-  const zoomBy = (delta: number) => setMobileZoom((value) => clampZoom(value + delta));
-  const resetMobileView = () => { setMobileZoom(1); setMobilePan({ x: 0, y: 0 }); };
   const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
     if (event.touches.length === 2) {
       const a = event.touches[0]; const b = event.touches[1];

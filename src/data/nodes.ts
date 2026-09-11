@@ -117,22 +117,4 @@ export const PROJECTS: Project[] = [
       "ระบบจดจำใบหน้าและบันทึกการเข้า–ออกห้องของนักศึกษา เพื่อช่วยติดตามการใช้งานห้องและจัดเก็บข้อมูลการเข้าออกอย่างเป็นระบบ",
     href: "https://github.com/Keng043/smart_security_command_center",
   },
-  {
-    id: "csmju2030",
-    index: "LEAD 01",
-    title: "CSMJU2030",
-    description:
-      "โครงการพัฒนาระบบสารสนเทศขนาดใหญ่สำหรับสาขาวิทยาการคอมพิวเตอร์ มหาวิทยาลัยแม่โจ้ โดยผมได้รับเลือกเป็น Project Lead (PL) และดูแลทีม 4 คน พร้อมวางแผน แบ่งงาน ประสานงาน และกำหนดแนวทางการพัฒนาระบบ",
-    href: "/projects/csmju2030",
-    tags: "Project Lead · MIS · AI-Assisted Development",
-  },
-  {
-    id: "wireless-helmet-signal-light",
-    index: "AWARD 01",
-    title: "Wireless Helmet Signal Light",
-    description:
-      "อุปกรณ์เสริมหมวกกันน็อคนิรภัยอัจฉริยะที่แสดงสัญญาณไฟเลี้ยวและไฟเบรกบนหมวก เพื่อช่วยเพิ่มการมองเห็นและลดความเสี่ยงจากอุบัติเหตุบนท้องถนน",
-    href: "/projects/wireless-helmet-signal-light",
-    tags: "IoT · Safety Innovation · 1ST PRIZE",
-  },
-];
+ ];

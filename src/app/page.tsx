@@ -1,8 +1,6 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import ProjectsPreview from "@/components/ProjectsPreview";
-import SystemMap from "@/components/SystemMap";
-
 function About() {
   return (
     <section id="about" className="about-section">
@@ -56,7 +54,7 @@ function Footer() {
 }
 
 export default function Home() {
-  return <><Nav /><main><Hero /><About /><ProjectsPreview /><SystemMap /><section id="timeline" className="timeline-placeholder">
+  return <><Nav /><main><Hero /><About /><ProjectsPreview /><section id="timeline" className="focus-section">
         <div className="section-kicker">CH.03 — CURRENT DIRECTION</div>
         <div className="focus-head">
           <div>
@@ -84,6 +82,18 @@ export default function Home() {
             <p>สนใจการเชื่อมต่อ Software, Hardware และข้อมูลเข้าด้วยกัน เพื่อสร้างระบบที่แก้ปัญหาในโลกจริงได้</p>
             <small>STATUS: EXPLORING</small>
           </article>
+        </div>
+        <div className="roadmap" aria-label="Learning roadmap">
+          <div className="roadmap-head"><span>ROADMAP</span><span>PATH / IN PROGRESS</span></div>
+          <div className="roadmap-track">
+            <article className="roadmap-step"><span>01 / FOUNDATION</span><strong>Business Computer</strong><small>จุดเริ่มต้นด้านคอมพิวเตอร์</small></article>
+            <div className="roadmap-line" aria-hidden="true" />
+            <article className="roadmap-step"><span>02 / INNOVATION</span><strong>IoT Competitions</strong><small>เริ่มสร้างระบบจากปัญหาจริง</small></article>
+            <div className="roadmap-line" aria-hidden="true" />
+            <article className="roadmap-step active"><span>03 / CURRENT</span><strong>Computer Science</strong><small>พัฒนาพื้นฐานและสร้างโปรเจกต์</small></article>
+            <div className="roadmap-line" aria-hidden="true" />
+            <article className="roadmap-step next"><span>04 / NEXT</span><strong>Cybersecurity</strong><small>ทิศทางที่กำลังสำรวจต่อ</small></article>
+          </div>
         </div>
       </section><Footer /></main></>;
 }
